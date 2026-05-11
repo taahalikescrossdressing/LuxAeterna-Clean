@@ -1,5 +1,7 @@
 /** Dev: Vite rewrites `/api/*` → backend. Production: set `VITE_API_URL` to full API origin (no trailing slash). */
-const base = import.meta.env.VITE_API_URL ?? "/api";
+const base = import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL !== "" 
+  ? import.meta.env.VITE_API_URL 
+  : "https://luxaeterna-clean-copy-copy-production.up.railway.app";
 
 export type StatusPayload = {
   api_status: string;
