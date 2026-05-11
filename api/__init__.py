@@ -1,0 +1,1 @@
+"""LuxAeterna serving API package."""
