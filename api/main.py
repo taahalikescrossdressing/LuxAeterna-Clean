@@ -115,7 +115,7 @@ def _compute_data_freshness_minutes() -> float | None:
 
 
 def _cors_origins() -> list[str]:
-    raw = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,https://appealing-manifestation-production-f502.up.railway.app")
+    raw = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,https://luxaeterna-clean-production.up.railway.app")
     return [o.strip() for o in raw.split(",") if o.strip()]
 
 
