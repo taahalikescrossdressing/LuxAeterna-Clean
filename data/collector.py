@@ -165,21 +165,21 @@ class WeatherCollector:
         merged = merged[(merged["timestamp"] >= self.config.start_time) & (merged["timestamp"] <= self.config.end_time)]
 
         if "temperature" not in merged.columns:
-            merged["temperature"] = pd.NA
+            merged["temperature"] = np.nan
         if "relative_humidity" not in merged.columns:
-            merged["relative_humidity"] = pd.NA
+            merged["relative_humidity"] = np.nan
         if "visibility" not in merged.columns:
-            merged["visibility"] = pd.NA
+            merged["visibility"] = np.nan
 
         if "owm_temperature" in merged.columns:
-            merged["temperature"] = merged["temperature"].combine_first(merged["owm_temperature"])
+            merged["temperature"] = merged["temperature"].astype(float).combine_first(merged["owm_temperature"].astype(float))
         if "owm_relative_humidity" in merged.columns:
-            merged["relative_humidity"] = merged["relative_humidity"].combine_first(merged["owm_relative_humidity"])
+            merged["relative_humidity"] = merged["relative_humidity"].astype(float).combine_first(merged["owm_relative_humidity"].astype(float))
         if "owm_visibility" in merged.columns:
-            merged["visibility"] = merged["visibility"].combine_first(merged["owm_visibility"])
+            merged["visibility"] = merged["visibility"].astype(float).combine_first(merged["owm_visibility"].astype(float))
 
         if "pm25" not in merged.columns:
-            merged["pm25"] = pd.NA
+            merged["pm25"] = np.nan
 
         solar = merged["timestamp"].apply(
             lambda ts: _compute_solar_geometry(self.config.latitude, self.config.longitude, ts)
